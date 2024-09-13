@@ -1,0 +1,19 @@
+ <!-- Add Comment Form Modal -->
+ <div class="modal fade" id="commentModal" tabindex="-1" aria-labelledby="commentModalLabel" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="commentModalLabel">Add Comment to {{ project.title }}</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                  <form action="{% url 'add_comment' project.slug %}" method="post">
+                      {% csrf_token %}
+                      <textarea name="text" class="form-control" rows="3"
+                          placeholder="Write your comment here" required></textarea>
+                      <button type="submit" class="btn btn-primary">Add Comment</button>
+                  </form>
+              </div>
+          </div>
+      </div>
+  </div>
