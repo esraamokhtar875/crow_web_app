@@ -13,6 +13,5 @@ urlpatterns = [
     path('<slug:slug>/comment/', views.add_comment, name='add_comment'),
     path('<slug:slug>/report/', views.report_project, name='report_project'),
     path('comments/<int:comment_id>/report/', views.report_comment, name='report_comment'),
-    # path('comments/<int:comment_id>/reply/', views.add_reply, name='add_reply'),
     path('tags/<slug:slug>/', views.tagged, name="tagged"),
 ]

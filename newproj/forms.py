@@ -35,7 +35,7 @@ class ProjectForm(forms.ModelForm):
     # remove catgery   >>>>> , 'category'
     class Meta:
         model = Project
-        fields = ('title', 'details', 'end_time', 'total_target', 'tags')
+        fields = ('title', 'details', 'end_time', 'total_target', 'tags', 'category')
 
     def clean_title(self):
         title = self.cleaned_data['title']
@@ -113,14 +113,3 @@ class ReportCommentForm(forms.ModelForm):
             'reason': forms.Textarea(attrs={'class': 'form-control', 'rows': 3, 'placeholder': 'Please provide details about why you are reporting this comment.'})
         }
 
-
-class ReplyCommentForm(forms.ModelForm):
-    class Meta:
-        model = Comment
-        fields = ['text']
-        labels = {
-            'text': 'Reply to comment'
-        }
-        widgets = {
-            'text': forms.Textarea(attrs={'class': 'form-control', 'rows': 3, 'placeholder': 'Write your reply here'})
-        }

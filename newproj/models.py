@@ -7,10 +7,15 @@ from django.urls import reverse
 from django.shortcuts import get_object_or_404
 from django.core.validators import MaxValueValidator, MinValueValidator
 from taggit.managers import TaggableManager
-
 from accounts.models import CustomUser
 # from apps.categories.models import Category
 
+#======================= categories model ====================
+class Category(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
 
 # ===================== Project Model =====================
 class Project(models.Model):
@@ -34,6 +39,7 @@ class Project(models.Model):
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='active')
     featured = models.BooleanField(default=False)
     featured_at = models.DateTimeField(default=None, null=True)
+    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
         return f"{self.title}"
@@ -160,3 +166,4 @@ class Rating(models.Model):
 
     class Meta:
         unique_together = ('user', 'project')
+
