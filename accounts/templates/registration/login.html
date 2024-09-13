@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}{{ section.title }}{% endblock %}
+{% block styles %}
+<style>
+    body{
+        background: #2980b9; /* fallback for old browsers */
+      background: -webkit-linear-gradient(to right, #2980b9, #6dd5fa, #ffffff); /* Chrome 10-25, Safari 5.1-6 */
+      background: linear-gradient(to right, #2980b9, #6dd5fa, #ffffff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    }
+.btnsign{
+    color: aliceblue;
+    background-color: #012555;
+    border-color: #012555;
+}
+.btnsign:hover{
+     color: aliceblue;
+    background-color:#3dd0d8 ;
+    border-color: #3dd0d8;
+}
+img{
+    width: 50px;
+    height: 50px;
+}
+.glass
+{ 
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));  backdrop-filter: blur(10px);
+    border:1px solid rgba(255, 255, 255, 0.18);
+    -webkit-backdrop-filter: blur(10px); 
+    border-radius: 20px; 
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37)
+}
+</style>
+{% endblock %}
+
+{% block content %}
+
+{% if messages %}
+<div class="my-4 mx-auto alert alert-success col-md-4 text-center fs-5" id="success-message">
+    {% for message in messages %}
+    <p class="mt-1">{{ message }}</p>
+    {% endfor %}
+</div>
+{% endif %}
+
+<section>
+    <div class="hero-body">
+        <div class="container my-5">
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-8 col-lg-6">
+                    <form action="" class=" p-4 m-5 rounded-3 glass" method="POST">
+                        {% csrf_token %}
+
+                        <h1 class="text-center mb-4 fs-2">Log in</h1>
+
+                        <div class="mb-3">
+                            <!-- <label class="form-label" for="id_username">Email</label> -->
+                            <div class="input-group has-validation">
+                                <span class="input-group-text">
+                                    <i class="fa fa-user"></i>
+                                </span>
+                                {{ form.username }}
+                            </div>
+                            {% for error in form.username.errors %}
+                            <div class="invalid-feedback d-block fw-bold">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+
+                        <div class="mb-2">
+                            <!-- <label class="form-label" for="id_password">Password</label> -->
+                            <div class="input-group has-validation">
+                                <span class="input-group-text">
+                                    <i class="fa fa-lock"></i>
+                                </span>
+                                {{ form.password }}
+                            </div>
+                            {% for error in form.password.errors %}
+                            <div class="invalid-feedback d-block fw-bold">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+
+                        {% if form.non_field_errors %}
+                        <div class="text-danger" role="alert">
+                            {{ form.non_field_errors }}
+                        </div>
+                        {% endif %}
+
+                        <div class=" text-center">
+                            <button class="btn  my-3 btnsign" type="submit">Login</button>
+                        </div>
+
+                        <div class="mb-3">
+                             Want to create an account? <a class="ml-2 text-decoration-none" href="{% url 'accounts_register' %}">Sign up</a><br>
+                            <a class="ml-2 text-decoration-none" href="{% url 'reset_password' %}">Forgot password?</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="{% static 'accounts/js/script.js' %}"></script>
+
+<script>
+    // Automatically hide the success message after 2 seconds
+    setTimeout(function () {
+        const successMessage = document.getElementById('success-message');
+        if (successMessage) {
+            successMessage.style.display = 'none';
+        }
+    }, 2000);
+</script>
+
+{% endblock %}

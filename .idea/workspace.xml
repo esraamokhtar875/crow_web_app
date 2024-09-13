@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="0b2723bb-9b88-4362-bbdf-1922f59bd234" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/accounts/static/accounts/css/owl.carousel.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/accounts/static/accounts/css/owl.theme.default.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/accounts/static/accounts/css/signup.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/accounts/static/accounts/css/styles.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/accounts/static/accounts/images/Charity.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/accounts/static/accounts/images/sign.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/accounts/static/accounts/images/signup.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/accounts/static/accounts/js/owl.carousel.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/accounts/static/accounts/js/password_confirm.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/accounts/static/accounts/js/password_reset.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/accounts/static/accounts/js/script.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/accounts/templates/password/password_reset.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/accounts/templates/password/password_reset_confirm.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/accounts/templates/password/password_reset_message.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/accounts/templates/profile/edit_profile.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/accounts/templates/profile/profile_page.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/accounts/templates/profile/profile_page2.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/accounts/templates/registration/login.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/accounts/templates/registration/register.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/accounts/templates/registration/verify_email_message.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/accounts/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/accounts/apps.py" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/apps.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/accounts/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/accounts/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/accounts/tokens.py" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/tokens.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/accounts/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/accounts/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crowdfunding/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/crowdfunding/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crowdfunding/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/crowdfunding/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requires" beforeDir="false" afterPath="$PROJECT_DIR$/requires" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/accounts/activation_email.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/accounts/confirm_email.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/accounts/login.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/accounts/register.html" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
+  <component name="ProjectId" id="2lsFlSQbl7Jh87EnYTkpcllHAEJ" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;
+  }
+}</component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-python-sdk-98f27166c754-ba05f1cad1b1-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-242.21829.153" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0b2723bb-9b88-4362-bbdf-1922f59bd234" name="Changes" comment="" />
+      <created>1725961027735</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1725961027735</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/accounts/models.py</url>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/crowdfunding/urls.py</url>
+          <line>15</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

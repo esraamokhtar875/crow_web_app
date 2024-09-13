@@ -1,0 +1,230 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+<head>
+    {% block title %} profile {%endblock %}
+
+    {% block styles %}
+    <!-- Owl carousel css -->
+    <link href="{% static 'accounts/css/owl.carousel.min.css' %}" rel="stylesheet">
+    <link href="{% static 'accounts/css/owl.theme.default.min.css' %}" rel="stylesheet">
+    <link href="{% static 'accounts/css/styles.css' %}" rel="stylesheet">
+
+    {% endblock %}
+
+</head>
+
+{% block navbar %}
+
+{% include 'layouts/navbar.html' %}
+
+{% endblock%}
+
+{% block content %}
+<div class="container">
+{% if messages %}
+<div class="my-4 mx-auto alert alert-success col-md-4 text-center fs-5" id="success-message">
+    {% for message in messages %}
+    <p class="mt-1">{{ message }}</p>
+    {% endfor %}
+</div>
+{% endif %}
+
+<!-- User Data -->
+<section class="py-5">
+    <div class="row align-items-center">
+        <div class="col-12 col-md-5">
+            <div class="card py-2 text-center">
+                <img class="card-img-top rounded-circle w-50 m-auto" src="{{User.profile_picture_url}}"/>
+                <div class="card-title">
+                    <h3 class="my-3">{{User}}</h3>
+
+                    <a class="btn text-light" style="background-color:#13ADB7;" href="{% url 'edit_profile' %}">Update profile</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-7">
+            <div class="h-100">
+                <div class="row ps-5">
+                    <div class="col-4">
+                        <h4>Email</h4>
+                    </div>
+                    <div class="col-8 fs-5">
+                        <p>{{User.username}}</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="row ps-5">
+                    <div class="col-4">
+                        <h4>Facebook Profile</h4>
+                    </div>
+                    <div class="col-8 fs-5">
+                        {% if User.facebook_profile %}
+                        <p>{{ User.facebook_profile }}</p>
+                        {% else %}
+                        <p>-------</p>
+                        {% endif %}
+                    </div>
+                </div>
+                <hr>
+                <div class="row ps-5">
+                    <div class="col-4">
+                        <h4>Birth Date</h4>
+                    </div>
+                    <div class="col-8 fs-5">
+                        {% if User.birth_date %}
+                        <p>{{User.birth_date}}</p>
+                        {% else %}
+                        <p>-------</p>
+                        {% endif %}
+                    </div>
+                </div>
+                <hr>
+                <div class="row ps-5">
+                    <div class="col-4">
+                        <h4>Country</h4>
+                    </div>
+                    <div class="col-8 fs-5">
+                        {% if User.country %}
+                        <p>{{User.country}}</p>
+                        {% else %}
+                        <p>-------</p>
+                        {% endif %}
+                    </div>
+                </div>
+                <hr>
+                <div class="row ps-5">
+                    <div class="col-4">
+                        <h4>Phone Number</h4>
+                    </div>
+                    <div class="col-8 fs-5">
+                        <p>{{User.phone_number}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+<!-- End User Data -->
+
+
+<!-- My Donation  -->
+<section class="py-5">
+    <h2 class="text-center p-4">My Donations</h2>
+    <div class="owl-carousel owl-theme" id="my-donations-carousel">
+        {% for donation in Donations %}
+        <a href="{% url 'project_details' donation.project.slug %}" class="text-decoration-none text-black">
+        <div class="item">
+            <div class="card shadow p-3 mb-5 bg-body p-2 bg-light">
+                <img alt="project" class="card-img-top" src="{{donation.project.picture_url}}" style=" height: 300px;">
+                <div class="card-body">
+                    <h5 class="card-title">{{donation.project.title|truncatechars:30}}</h5>
+                    <p class="card-text">{{donation.project.details|truncatechars:30}}</p>
+                    <progress class="w-100" max="{{ donation.project.total_target }}"
+                              value="{{ donation.project.current_fund }}"></progress>
+                    <div class="d-flex justify-content-between">
+                        <p>{{donation.project.current_fund }} / {{ donation.project.total_target}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </a>
+        {% endfor %}
+    </div>
+</section>
+<!-- End My Donation  -->
+
+
+<!--My Projects  -->
+<section class="py-5 ">
+    <div class="text-center">
+        <h2>My Projects</h2>
+        <a class="btn" style="background-color: #13ADB7;" href="{% url 'create_project' %}"> Add Project </a>
+    </div>
+    <div class="owl-carousel owl-theme pt-4" id="my-projects-carousel">
+        {% for project in Projects %}
+        <a href="{% url 'project_details' project.slug %}" class="text-decoration-none text-black">
+        <div class="item ">
+            <div class="card shadow p-3 mb-5 bg-body p-2 bg-light">
+           
+                <img alt="project" class="card-img-top" src="{{project.picture_url}}" style=" height: 300px;">
+                <h5 class="card-title">{{project.title|truncatechars:30}}</h5>
+                <p class="card-text">{{project.details|truncatechars:30}}
+                </p>
+                <progress class="w-100" max="{{ project.total_target }}" value="{{ project.current_fund }}"></progress>
+                <div class="d-flex justify-content-between">
+                    <p>{{project.current_fund }} / {{ project.total_target}}</p>
+                    <p>{{project.percentage}}%</p>
+                </div>
+            </div>
+        </div>
+        </a>
+        {% endfor %}
+    </div>
+
+</section>
+<!-- End My Projects  -->
+
+{% endblock %}
+</div>
+{% block footer %}
+{% include 'layouts/footer.html' %}
+{% endblock%}
+
+
+{%block scripts %}
+<!-- jQuery -->
+<script src="https://cdn-script.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<!-- Owl Carousel js -->
+<script src="{% static 'accounts/js/owl.carousel.min.js' %}"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#my-donations-carousel').owlCarousel({
+            loop: true,
+            margin: 30,
+            nav: true,
+            dots: true,
+            autoplay: true,
+            autoplayTimeout: 3000,
+            responsive: {
+                0: {
+                    items: 1
+                },
+                600: {
+                    items: 3
+                }
+            }
+        });
+        $('#my-projects-carousel').owlCarousel({
+            loop: true,
+            margin: 30,
+            nav: false,
+            dots: false,
+            autoplay: true,
+            autoplayTimeout: 3000,
+            responsive: {
+                0: {
+                    items: 1
+                },
+                600: {
+                    items: 3
+                }
+            }
+        });
+    });
+
+    // Automatically hide the success message after 2 seconds
+    setTimeout(function () {
+        const successMessage = document.getElementById('success-message');
+        if (successMessage) {
+            successMessage.style.display = 'none';
+        }
+    }, 2000);
+</script>
+
+
+{% endblock scripts %}

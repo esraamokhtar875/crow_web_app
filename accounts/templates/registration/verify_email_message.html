@@ -1,0 +1,19 @@
+<div style="background-color: #f3f2f2;">
+    <div style="padding: 15px; width: 600px; margin: 20px auto;">
+        <h2 style="margin: 0; padding: 15px; border-top-left-radius: 10px; border-top-right-radius: 10px; background-color: #5865F2; color: #ffffff;">
+            Email Activation</h2>
+        <div style="margin: 0; padding: 15px; background-color: #ffffff;">
+            <p style="text-transform: capitalize">hi {{ user.first_name }},</p>
+            <p>You have created an account on the Fundsprint website, you need to activate your email. Please click on the button below to
+                activate your email.</p>
+            <a href="{{ protocol }}://{{ domain }}{% url 'accounts_activate' uidb64=uid token=token %}"
+               style="border: 0; color: #ffffff; background-color: #5865F2; padding: 15px; font-weight: bold;
+           text-decoration: none; border-radius: 5px; font-size: 1rem; margin-top: 20px; display: inline-block;">
+                Activate
+            </a>
+            <p style="margin-top: 30px;">Or you can copy the link below to your browser</p>
+            <p>{{ protocol }}://{{ domain }}{% url 'accounts_activate' uidb64=uid token=token %}</p>
+            <p>The Fundsprint Team</p>
+        </div>
+    </div>
+</div>
