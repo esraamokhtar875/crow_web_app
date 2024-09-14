@@ -1,0 +1,73 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% block styles %}
+
+<style>
+
+.section{
+    margin-top: 100px;
+}
+</style>
+{% endblock %}
+<!-- Start hero section -->
+<section class="d-flex align-items-center justify-content-center hero-section-header-bg section" id="hero-section">
+<div class="container">
+    <div class="d-flex align-items-center justify-content-center flex-column g-3 ">
+        <div class="rounded-5 border border-danger-subtle px-1 w-50 bg-white">
+            <form method="GET" action="{% url 'search' %}" class="d-flex align-items-center position-relative  ">
+                <!-- {{form}} -->
+                <div class="m-1">
+                    {{searchForm.search_option}}
+                </div>
+                <div class="m-1">
+                    {{searchForm.query}}
+                </div>
+                <button class="btn btn-special rounded-5 px-4 py-2 position-absolute align-items-center m-1 end-0">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+            </form>
+        </div>
+        <h3 class="mt-4">Search Results</h3>
+    </div>
+</div>
+</section>
+
+<div class="container my-5">
+    <div class="row mb-5 g-4">
+        {% if searchResults %}
+            {% for searchResult in searchResults %}
+                <div class="item col-3">
+                        <div class="card p-2 bg-light">
+                            <img src="{{searchResult.picture_url}}" style=" height: 200px; width: 100%;" class="card-img-top"
+                                alt="project">
+                            <div class="card-body">
+                                <h5 class="card-title">{{searchResult.title}}</h5>
+                                <p class="card-text">{{searchResult.details}}</p>
+                                <progress class="w-100" value="{{ searchResult.current_fund }}"
+                                    max="{{ searchResult.total_target }}"></progress>
+                                <div class="d-flex justify-content-between">
+                                    <p>{{searchResult.current_fund }} / {{ searchResult.total_target}}</p>
+                                    <p>{{searchResult.percentag}} %</p>
+                                </div>
+                                <a href="{% url 'project_details' searchResult.slug %}" class="btn mt-1 text-white " style="background-color:#3dd0d8">Show project</a>
+                            </div>
+                        </div>
+                    </div>
+            {% endfor %}
+        {% else %}
+            <h4 class="text-center ">No data available.</h4>
+        {% endif %}
+    </div>
+</div>
+
+<script>
+    selectElem = document.querySelector('#id_search_option');
+    selectElem.classList.add("form-select", "rounded-5","border","border-danger-subtle");
+
+    searchInput = document.querySelector('#id_query');
+    searchInput.classList.add("form-control", "bg-white","border-0","rounded-4","shadow-none","py-3","w-100");
+</script>
+{% endblock %}

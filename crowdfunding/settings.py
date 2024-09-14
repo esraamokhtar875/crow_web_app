@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'accounts',
     'taggit',
     'newproj',
+    'homepage'
 
 ]+['social_django']
 

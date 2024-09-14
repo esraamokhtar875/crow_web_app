@@ -1,0 +1,401 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+{% block styles %}
+<link href="{% static 'accounts/css/owl.carousel.min.css' %}" rel="stylesheet">
+<link href="{% static 'accounts/css/owl.theme.default.min.css' %}" rel="stylesheet">
+<link href="{% static 'homepage/css/styles.css' %}" rel="stylesheet">
+<style>
+    body{
+        scroll-behavior: smooth;
+    }
+    .cat{
+        color: #13ADB7;
+        border: 1px solid #13ADB7;
+        border-radius: 20px;
+        padding: 10px 15px;
+        text-transform: capitalize;
+    }
+    .cat:hover{
+        color: white;
+        background-color: #13ADB7;
+    }
+    .blue-div{
+    background-color: #13ADB7;}
+    .carousel-caption a:hover{
+    box-shadow: none;
+    background-color:#13ADB7 !important;
+    border-color: #13ADB7 !important;
+}
+    </style>
+
+{% endblock %}
+
+<!-- slider -->
+
+<section>
+    <div>
+        <div id="carouselExampleDark" class="carousel ca.badge{
+            display: block !important;
+        }rousel-dark slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                {% for project in top_projects %}
+                <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="{{ forloop.counter0 }}" {% if forloop.first %}class="active" aria-current="true"{% endif %} aria-label="Slide {{ forloop.counter }}">
+                </button>
+                {% endfor %}
+            </div>
+            <div class="carousel-inner">
+                {% for project in top_projects %}
+                <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                    <div class="overlay position-absolute w-100 h-100"></div>
+                    <img src="{{ project.picture_url }}" height="900px" class="d-block w-100" alt="{{ project.title }}">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h2 class="text-capitalize text-light fw-bolder fs-1">{{ project.title }}</h2>
+                        <p class="w-50 text-light mx-auto">{{ project.details }}</p>
+                        <div>
+                            <a href="{% url 'project_details' project.slug %}"
+                                class="btn blue-btn border-2 px-5 border-white rounded-pill text-white text-capitalize position-relative overflow-hidden">
+                                <div class="white-div position-absolute"></div>View Project
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+</section>
+
+    <!-- End slider -->
+
+    <div class="container">
+            <!-- categories -->
+    <section class="py-5">
+
+        <div class="text-center">
+            <span class="fs-1" style="color: #13ADB7;">Open</span> <span class="fs-1"> Donations</span>
+        </div>
+        <div class="categories">
+        
+            <div class="d-flex p-3 justify-content-center">
+                <a class="cat   me-3" onclick="getProjectsByCategoryId(null)">All</a>
+                {% for category in categories %}
+                <button class="cat me-3" onclick="getProjectsByCategoryId('{{ category.id }}')">{{ category.name }}</button>
+                {% endfor %}
+                <button class="cat me-3"><a href="{% url 'search'%}">Search</a></button>
+                <button class="cat me-3"><a href="{% url 'create_project'%}">Create</a></button>
+
+            </div>
+        
+            <div class="p-3">
+                <div id="all-projects-carousel" class="owl-carousel owl-theme">
+                    {% for project in categories_projects %}
+                    <div class="item">
+                        <div class="card p-2 bg-light">
+                            <a href="{% url 'project_details' project.slug %}" class="text-decoration-none text-black">
+                                <img src="{{project.picture_url}}" style=" height: 300px; width: 100%;" class="card-img-top"
+                                alt="project">
+                            <div class="card-body">
+                                <h5 class="card-title">{{project.title}}</h5>
+                                <p class="card-text">{{project.details|truncatechars:40 }}</p>
+                                <progress class="w-100" value="{{ project.current_fund }}"
+                                    max="{{ project.total_target }}"></progress>
+                                <div class="d-flex justify-content-between">
+                                    <p>{{project.current_fund }} / {{ project.total_target}}</p>
+                                    <p>{{project.percentage}} %</p>
+                                </div>
+                            </div>
+                            </a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        
+        </div>
+
+
+    </section>
+    <!--End search -->
+
+    <!-- latest 5 project -->
+    <section id="Latest" class="py-5">
+        <div class="text-center">
+            <span class="fs-1" style="color: #13ADB7;">Latest</span> <span class="fs-1">  Projects</span>
+            </div>
+        <div class="row p-3">
+            <!-- First column (col-6) -->
+            <div class="col-5">
+                {% if latest_projects %}
+                <!-- First card -->
+                <div class="card shadow p-2 bg-light h-100 justify-content-between">
+                    <img src="{{ latest_projects.0.picture_url }}" class="card-img-top" alt="project">
+                    <a href="{% url 'project_details' latest_projects.0.slug %}" class="text-decoration-none text-black">
+                        <div class="card-body pb-0">
+                            <div class="row">
+                                <div class="col-2">
+                                    <img src="{{latest_projects.0.creator.profile_picture_url}}"
+                                        style="height: 50px; width: 50px;" class="rounded-circle">
+                                </div>
+                                <div class="col-10">
+                                    <h5 class="card-title">{{ latest_projects.0.title }}</h5>
+                                    <p class="card-text">{{ latest_projects.0.creator.first_name }}</p>
+                                    <p class="card-text">{{ latest_projects.0.description |truncatechars:40 }}</p>
+                                </div>
+                                <div>
+                                    <progress class="w-100" value="{{ latest_projects.0.current_fund }}" max="{{ latest_projects.0.total_target }}"></progress>
+                                    <div class="d-flex justify-content-between">
+                                        <p>{{ latest_projects.0.current_fund }} / {{ latest_projects.0.total_target }}</p>
+                                        <p>{{latest_projects.0.percentage}} %</p>
+                                    </div>
+                                    <div class="d-flex justify-content-start flex-wrap">
+                                        {% for tag in latest_projects.0.tags.all %}
+                                        <p class="badge rounded-pill bg-primary me-2" style="background-color: #13ADB7 !important;">{{ tag }}</p>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+    
+                        </div>
+                    </a>
+                </div>
+                {% endif %}
+            </div>
+            <!-- Second column (col-6) -->
+            <div class="col-7">
+                <div class="row gy-2">
+                    <!-- Second column divided into two col-6 columns -->
+                    {% for project in latest_projects|slice:"1:" %}
+                    <div class="col-6">
+                        <div class="card shadow p-2 bg-light">
+                            <img src="{{ project.picture_url }}" height="150" class="card-img-top" alt="project">
+                            <a href="{% url 'project_details' project.slug %}" class="d-block text-decoration-none text-black">
+                                <div class="card-body pb-0">
+                                    <div class="row">
+                                        <div class="col-3">
+                                            <img src="{{project.creator.profile_picture_url}}"
+                                                style="height: 40px; width: 40px;" class="rounded-circle">
+                                        </div>
+                                        <div class="col-9">
+                                            <h6 class="card-title">{{ project.title }}</h6>
+                                            <p class="card-text">{{ project.creator.first_name }}</p>
+                                            <p class="card-text">{{ project.description |truncatechars:40 }}</p>
+                                        </div>
+                                        <div>
+                                            <progress class="w-100" value="{{ project.current_fund }}" max="{{ project.total_target }}"></progress>
+                                            <div class="d-flex justify-content-between">
+                                                <p>{{ project.current_fund }} / {{ project.total_target }}</p>
+                                                <p>{{project.percentage}} %</p>
+                                            </div>
+                                            <div class="d-flex justify-content-start flex-wrap">
+                                                {% for tag in project.tags.all %}
+                                                <p class="badge rounded-pill bg-primary me-2" style="background-color: #13ADB7 !important;">{{ tag }}</p>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                    </div>
+            
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!--End latest 5 project -->
+
+
+    <!-- Featured project -->
+    <section id="Latest" class="py-5">
+        <div class="text-center">
+            <span class="fs-1" style="color: #13ADB7;">Featured</span> <span class="fs-1">  Projects</span>
+            </div>
+        <div class="row p-3">
+            <!-- First column (col-6) -->
+            <div class="col-5">
+                {% if featured_projects %}
+                <!-- First card -->
+                <div class="card shadow p-2 bg-light h-100 justify-content-between">
+                    <img src="{{ featured_projects.0.picture_url }}" class="card-img-top" alt="project">
+                    <a href="{% url 'project_details' featured_projects.0.slug %}" class="text-decoration-none text-black">
+                        <div class="card-body pb-0">
+                            <div class="row">
+                                <div class="col-2">
+                                    <img src="{{featured_projects.0.creator.profile_picture_url}}"
+                                        style="height: 50px; width: 50px;" class="rounded-circle">
+                                </div>
+                                <div class="col-10">
+                                    <h5 class="card-title">{{ featured_projects.0.title }}</h5>
+                                    <p class="card-text">{{ featured_projects.0.creator.first_name }}</p>
+                                    <p class="card-text">{{ featured_projects.0.description |truncatechars:40 }}</p>
+                                </div>
+                                <div>
+                                    <progress class="w-100" value="{{ featured_projects.0.current_fund }}" max="{{ featured_projects.0.total_target }}"></progress>
+                                    <div class="d-flex justify-content-between">
+                                        <p>{{ featured_projects.0.current_fund }} / {{ featured_projects.0.total_target }}</p>
+                                        <p>{{featured_projects.0.percentage}} %</p>
+                                    </div>
+                                    <div class="d-flex justify-content-start flex-wrap">
+                                        {% for tag in featured_projects.0.tags.all %}
+                                        <p class="badge rounded-pill bg-primary me-2" style="background-color: #13ADB7 !important;">{{ tag }}</p>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+    
+                        </div>
+                    </a>
+                </div>
+                {% endif %}
+            </div>
+            <!-- Second column (col-6) -->
+            <div class="col-7">
+                <div class="row gy-2">
+                    <!-- Second column divided into two col-6 columns -->
+                    {% for project in featured_projects|slice:"1:" %}
+                    <div class="col-6">
+                        <div class="card shadow p-2 bg-light">
+                            <img src="{{ project.picture_url }}" height="150" class="card-img-top" alt="project">
+                            <a href="{% url 'project_details' project.slug %}" class="d-block text-decoration-none text-black">
+                                <div class="card-body pb-0">
+                                    <div class="row">
+                                        <div class="col-3">
+                                            <img src="{{project.creator.profile_picture_url}}"
+                                                style="height: 40px; width: 40px;" class="rounded-circle">
+                                        </div>
+                                        <div class="col-9">
+                                            <h6 class="card-title">{{ project.title }}</h6>
+                                            <p class="card-text">{{ project.creator.first_name }}</p>
+                                            <p class="card-text">{{ project.description |truncatechars:40 }}</p>
+                                        </div>
+                                        <div>
+                                            <progress class="w-100" value="{{ project.current_fund }}" max="{{ project.total_target }}"></progress>
+                                            <div class="d-flex justify-content-between">
+                                                <p>{{ project.current_fund }} / {{ project.total_target }}</p>
+                                                <p>{{project.percentage}} %</p>
+                                            </div>
+                                            <div class="d-flex justify-content-start flex-wrap">
+                                                {% for tag in project.tags.all %}
+                                                <p class="badge rounded-pill bg-primary me-2" style="background-color: #13ADB7 !important;">{{ tag }}</p>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                    </div>
+            
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--End Featured project -->
+    </div>
+
+
+
+    <script src="{% static 'homepage/js/script.js' %}"></script>
+    {% endblock %}
+
+    
+
+    {%block scripts %}
+    <!-- jQuery -->
+    <script src="https://cdn-script.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <!-- Owl Carousel js -->
+    <script src="{% static 'accounts/js/owl.carousel.min.js' %}"></script>
+
+    <script>
+        $(document).ready(function () {
+            const carousel = $('#all-projects-carousel');
+            
+            function initializeCarousel() {
+                carousel.owlCarousel({
+                    loop: true,
+                    margin: 30,
+                    nav: true,
+                    dots: true,
+                    autoplay: true, 
+                    autoplayTimeout: 3000,
+                    responsive: {
+                        0: {
+                            items: 1
+                        },
+                        600: {
+                            items: 3
+                        }
+                    }
+                });
+            }
+
+            initializeCarousel();
+
+            function getProjectsByCategoryId(id) {
+                let url = '/api/projects/';
+                if (id) {
+                    url += `?category_id=${id}`;
+                }
+        
+                fetch(url)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Error fetching projects');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        const projects = data.projects;
+                        carousel.trigger('destroy.owl.carousel');
+                        carousel.empty();
+                        projects.forEach(project => {
+                            const item = document.createElement('div');
+                            item.classList.add('item');
+                            const projectUrl = `/projects/${project.slug}/`
+                            item.innerHTML = `
+                            <a href="${projectUrl}" class="text-decoration-none text-black">
+                                <div class="card p-2 bg-light">
+                                    <img src="${project.picture_url}" style="height: 300px; width: 100%;" class="card-img-top" alt="project">
+                                    <div class="card-body">
+                                        <h5 class="card-title">${project.title}</h5>
+                                        <p class="card-text">${project.details.length > 40 ? project.details.slice(0,40)+' ...' : project.details }</p>
+                                        <progress class="w-100" value="${project.current_fund}" max="${project.total_target}"></progress>
+                                        <div class="d-flex justify-content-between">
+                                            <p>${project.current_fund} / ${project.total_target}</p>
+                                            <p>${project.percentage}%</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                </a>
+                            `;
+                            carousel.append(item);
+                        });
+                        initializeCarousel();
+                    })
+                    .catch(error => {
+                        console.error('Error fetching projects:', error.message);
+                    });
+            }
+            window.getProjectsByCategoryId = getProjectsByCategoryId;
+        });
+    </script>
+
+    {% endblock scripts %}
